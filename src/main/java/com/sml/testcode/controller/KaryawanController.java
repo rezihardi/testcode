@@ -1,6 +1,5 @@
 package com.sml.testcode.controller;
 
-
 import com.sml.testcode.exception.ResourceNotFoundException;
 import com.sml.testcode.model.Karyawan;
 import com.sml.testcode.repository.KaryawanRepository;
@@ -23,6 +22,15 @@ public class KaryawanController {
     public List<Karyawan> getAllKaryawan() {
         return karyawanRepository.findAll();
     }
+
+    @GetMapping("/getdatakaryawan/{nik}")
+    public ResponseEntity<Karyawan> getKaryawanByNik(@PathVariable(value = "nik") Long karyawanNik)
+        throws ResourceNotFoundException {
+        Karyawan karyawan = karyawanRepository.findById(karyawanNik)
+                .orElseThrow(() -> new ResourceNotFoundException("Nik Karyawan tidak ditemukan :: " + karyawanNik));
+        return ResponseEntity.ok().body(karyawan);
+    }
+
 
     @PostMapping("/postdatakaryawan")
     public Karyawan createKaryawan(@Valid @RequestBody Karyawan karyawan){
