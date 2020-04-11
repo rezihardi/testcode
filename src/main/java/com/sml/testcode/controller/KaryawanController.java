@@ -25,23 +25,24 @@ public class KaryawanController {
 
     @GetMapping("/getdatakaryawan/{nik}")
     public ResponseEntity<Karyawan> getKaryawanByNik(@PathVariable(value = "nik") Long karyawanNik)
-        throws ResourceNotFoundException {
+            throws ResourceNotFoundException {
         Karyawan karyawan = karyawanRepository.findById(karyawanNik)
                 .orElseThrow(() -> new ResourceNotFoundException("Nik Karyawan tidak ditemukan :: " + karyawanNik));
         return ResponseEntity.ok().body(karyawan);
     }
 
 
+
     @PostMapping("/postdatakaryawan")
-    public Karyawan createKaryawan(@Valid @RequestBody Karyawan karyawan){
+    public Karyawan createKaryawan(@Valid @RequestBody Karyawan karyawan) {
         return karyawanRepository.save(karyawan);
     }
 
     @PutMapping("/editdatakaryawan/{nik}")
     public ResponseEntity<Karyawan> updateKaryawan(@PathVariable(value = "nik") Long karyawanNik,
-                                    @Valid @RequestBody Karyawan karyawanDetails) throws ResourceNotFoundException {
-       Karyawan karyawan = karyawanRepository.findById(karyawanNik)
-               .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + karyawanNik));
+                                                   @Valid @RequestBody Karyawan karyawanDetails) throws ResourceNotFoundException {
+        Karyawan karyawan = karyawanRepository.findById(karyawanNik)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + karyawanNik));
 
         karyawan.setNama(karyawanDetails.getNama());
         karyawan.setAlamat(karyawanDetails.getAlamat());
@@ -59,4 +60,10 @@ public class KaryawanController {
         response.put("deleted", Boolean.TRUE);
         return response;
     }
+
+    @GetMapping("/karyawans")
+    public String showKaryawan() {
+        return "karyawan";
+    }
+
 }
