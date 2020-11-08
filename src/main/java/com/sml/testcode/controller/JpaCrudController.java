@@ -14,7 +14,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
-public class KaryawanController {
+public class JpaCrudController {
     @Autowired
     KaryawanRepository karyawanRepository;
 
@@ -30,7 +30,6 @@ public class KaryawanController {
                 .orElseThrow(() -> new ResourceNotFoundException("Nik Karyawan tidak ditemukan :: " + karyawanNik));
         return ResponseEntity.ok().body(karyawan);
     }
-
 
     @PostMapping("/postdatakaryawan")
     public Karyawan createKaryawan(@Valid @RequestBody Karyawan karyawan) {

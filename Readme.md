@@ -5,7 +5,7 @@ This app is used for my Coding test in the application process at the SML Tech c
 
 ##Requirements
 1. Maven
-2. Java IDE (Recommended using Intellij Ultimate :D)
+2. Java IDE  (test)
 3. JDK 1.8
 
 ##To Run the App
