@@ -32,7 +32,6 @@ public class KaryawanController {
     }
 
 
-
     @PostMapping("/postdatakaryawan")
     public Karyawan createKaryawan(@Valid @RequestBody Karyawan karyawan) {
         return karyawanRepository.save(karyawan);
