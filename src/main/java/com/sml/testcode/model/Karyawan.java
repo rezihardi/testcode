@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class Karyawan {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+//    @GeneratedValue (strategy = GenerationType.AUTO)
     private Long nik;
 
     private String nama;
