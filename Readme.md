@@ -1,4 +1,3 @@
-# Test Code Interview Sarana Maju Lestari
 ## A Simple Spring Boot Restful App 
 
 This app is used for my Coding test in the application process at the SML Tech company
