@@ -4,4 +4,25 @@
     <select id="getAllKaryawan" resultType="com.sml.testcode.model.Karyawan">
         select * from karyawan
     </select>
+
+    <insert id="save" parameterType="com.sml.testcode.model.Karyawan">
+        INSERT INTO karyawan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nik != null">nik,</if>
+            <if test="nama != null">nama,</if>
+            <if test="alamat != null">alamat,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="nik != null">#{nik},</if>
+            <if test="nama != null">#{nama},</if>
+            <if test="alamat != null">#{alamat},</if>
+        </trim>
+    </insert>
+
+    <select id="findLastId" resultType="Long">
+        select s.nik from sarana.karyawan s
+        order by s.nik desc
+        limit 1
+    </select>
 </mapper>

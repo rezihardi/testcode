@@ -10,4 +10,6 @@ import java.util.List;
 @Mapper
 public interface KaryawanMapper {
     List<Karyawan> getAllKaryawan();
+    void save (Karyawan karyawan);
+    Long findLastId ();
 }

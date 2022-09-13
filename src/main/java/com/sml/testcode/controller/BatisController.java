@@ -2,6 +2,8 @@ package com.sml.testcode.controller;
 
 import com.sml.testcode.mapper.KaryawanMapper;
 import com.sml.testcode.model.Karyawan;
+import com.sml.testcode.repository.KaryawanRepository;
+import com.sml.testcode.util.AppUtil;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -13,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/batis/karyawan")
@@ -20,6 +23,9 @@ import java.util.List;
 public class BatisController {
     @Autowired
     KaryawanMapper karyawanMapper;
+
+    @Autowired
+    KaryawanRepository karyawanRepository;
 
     @GetMapping(path = "/get-all-karyawan", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(" test ")
@@ -48,6 +54,13 @@ public class BatisController {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String strDate = sdf.format(now);
+        Karyawan karyawan = new Karyawan();
+        Long lastNik = karyawanMapper.findLastId();
+        System.out.println(lastNik);
+        karyawan.setNik(AppUtil.isObjectEmpty(lastNik) ? 1 : lastNik + 1);
+        karyawan.setNama("test increment");
+        karyawan.setAlamat("x-sari");
+        karyawanMapper.save(karyawan);
         System.out.println("Java cron job expression:: " + strDate);
     }
 }
