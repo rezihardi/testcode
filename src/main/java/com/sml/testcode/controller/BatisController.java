@@ -34,6 +34,7 @@ public class BatisController {
         try {
             System.out.println("teqs1");
             List<Karyawan> karyawans = karyawanMapper.getAllKaryawan();
+            System.out.println(karyawans);
             res.put("message", "success");
             res.put("status", "Ok");
             res.put("data", karyawans);
