@@ -32,9 +32,7 @@ public class BatisController {
     public ResponseEntity findRole() {
         LinkedHashMap<String, Object> res = new LinkedHashMap<>();
         try {
-            System.out.println("teqs1");
             List<Karyawan> karyawans = karyawanMapper.getAllKaryawan();
-            System.out.println(karyawans);
             res.put("message", "success");
             res.put("status", "Ok");
             res.put("data", karyawans);
@@ -49,17 +47,14 @@ public class BatisController {
         }
     }
 
-    @Scheduled(cron = "0 0/1 * 1/1 * ?")
-    //tiap menit
+    @Scheduled(cron = "0 0/1 * 1/1 * ?") //tiap menit
     public void cronJobSch() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date now = new Date();
         String strDate = sdf.format(now);
         Karyawan karyawan = new Karyawan();
         Long lastNik = karyawanMapper.findLastId();
-//        System.out.println(""lastNik);
         karyawan.setNik(AppUtil.isObjectEmpty(lastNik) ? 1 : lastNik + 1);
-        System.out.println(karyawan.getNik());
         karyawan.setNama("test increment");
         karyawan.setAlamat("x-sari");
         karyawanMapper.save(karyawan);
