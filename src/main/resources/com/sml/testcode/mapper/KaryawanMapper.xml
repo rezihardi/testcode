@@ -22,6 +22,9 @@
 
     <select id="findLastId" resultType="Long">
         select s.nik from sarana.karyawan s
+        <where>
+            1=1
+        </where>
         order by s.nik desc
         limit 1
     </select>

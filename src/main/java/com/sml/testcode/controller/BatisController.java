@@ -57,8 +57,9 @@ public class BatisController {
         String strDate = sdf.format(now);
         Karyawan karyawan = new Karyawan();
         Long lastNik = karyawanMapper.findLastId();
-        System.out.println(lastNik);
+//        System.out.println(""lastNik);
         karyawan.setNik(AppUtil.isObjectEmpty(lastNik) ? 1 : lastNik + 1);
+        System.out.println(karyawan.getNik());
         karyawan.setNama("test increment");
         karyawan.setAlamat("x-sari");
         karyawanMapper.save(karyawan);
