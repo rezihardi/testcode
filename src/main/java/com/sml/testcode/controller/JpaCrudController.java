@@ -61,7 +61,7 @@ public class JpaCrudController {
 
     @GetMapping("/karyawans")
     public String showKaryawan() {
-        return "karyawan";
+        return "anda di prank";
     }
 
 }
