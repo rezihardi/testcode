@@ -3,6 +3,7 @@ package com.sml.testcode.controller;
 import com.sml.testcode.exception.ResourceNotFoundException;
 import com.sml.testcode.model.Karyawan;
 import com.sml.testcode.repository.KaryawanRepository;
+import com.sml.testcode.service.KaryawanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ import java.util.Map;
 public class JpaCrudController {
     @Autowired
     KaryawanRepository karyawanRepository;
+
+    @Autowired
+    KaryawanService karyawanService;
 
     @GetMapping("/getdatakaryawan")
     public List<Karyawan> getAllKaryawan() {
@@ -61,6 +65,7 @@ public class JpaCrudController {
 
     @GetMapping("/karyawans")
     public String showKaryawan() {
+        karyawanService.testReactor();
         return "anda di prank";
     }
 
