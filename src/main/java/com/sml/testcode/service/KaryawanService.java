@@ -51,7 +51,7 @@ public class KaryawanService {
     }
 
     public void posterRestTemplate(Mail mail){
-        String response = null;
+        String response;
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("x-msisdn", "6281219703071");
@@ -61,6 +61,7 @@ public class KaryawanService {
             response = restTemplate
                     .exchange("https://httpbin.org/post", HttpMethod.POST, entity, String.class)
                     .getBody();
+            System.out.println(response.getClass().getSimpleName());
             LOGGER.info("response template " + response);
         } catch (Exception e){
             LOGGER.info("Failed Hit", e);
