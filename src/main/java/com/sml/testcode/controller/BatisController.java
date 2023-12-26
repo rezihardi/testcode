@@ -46,19 +46,10 @@ public class BatisController {
         }
     }
 
-    @Scheduled(cron = "0 0/1 * 1/1 * ?") //tiap menit
-    public void cronJobSch() {
+//    @Scheduled(cron = "0 0/1 * 1/1 * ?") //tiap menit
+//    public void cronJobSch() {
+//        System.out.println("mulai scheduller");
+//        System.out.println("akhir scheduller");
+//    }
 
-        System.out.println("mulai job");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date now = new Date();
-        String strDate = sdf.format(now);
-        Karyawan karyawan = new Karyawan();
-        Long lastNik = karyawanMapper.findLastId();
-        karyawan.setNik(AppUtil.isObjectEmpty(lastNik) ? 1 : lastNik + 1);
-        karyawan.setNama("increment");
-        karyawan.setAlamat("x-sari");
-        karyawanMapper.save(karyawan);
-        System.out.println("Java cron job expression:: " + strDate);
-    }
 }
