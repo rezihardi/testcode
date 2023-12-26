@@ -10,8 +10,5 @@ import lombok.NoArgsConstructor;
 
 public class Mail {
     // Class data members
-    private String recipient;
-    private String msgBody;
-    private String subject;
-    private String attachment;
+    private String name;
 }

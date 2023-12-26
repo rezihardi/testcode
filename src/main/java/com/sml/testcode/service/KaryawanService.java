@@ -3,11 +3,13 @@ package com.sml.testcode.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sml.testcode.model.DataNation;
+import com.sml.testcode.model.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
@@ -28,7 +30,6 @@ public class KaryawanService {
     public Object getFile() {
 
         HttpHeaders headers = new HttpHeaders();
-//        headers.setAccept(Collections.singletonList(MediaType.parseMediaType("text/plain")));
         String response = null;
         try {
             HttpEntity<?> entity = new HttpEntity<>(headers);
@@ -44,8 +45,25 @@ public class KaryawanService {
 
     public DataNation responseData (Object object) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println(object.toString());
         String jsonString = object.toString();
         return objectMapper.readValue(jsonString, DataNation.class);
+    }
+
+    public void posterRestTemplate(String name){
+        String response = null;
+        try {
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("x-msisdn", "6281219703071");
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            Mail mail = new Mail();
+            mail.setName(name);
+            HttpEntity<?> entity = new HttpEntity<>(mail, headers);
+            response = restTemplate
+                    .exchange("https://httpbin.org/post", HttpMethod.POST, entity, String.class)
+                    .getBody();
+            LOGGER.info("response template " + response);
+        } catch (Exception e){
+            LOGGER.info("Failed Hit", e);
+        }
     }
 }
