@@ -11,6 +11,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 
@@ -49,14 +50,13 @@ public class KaryawanService {
         return objectMapper.readValue(jsonString, DataNation.class);
     }
 
-    public void posterRestTemplate(String name){
+    public void posterRestTemplate(Mail mail){
         String response = null;
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("x-msisdn", "6281219703071");
             headers.setContentType(MediaType.APPLICATION_JSON);
-            Mail mail = new Mail();
-            mail.setName(name);
+            mail.setName(mail.getName());
             HttpEntity<?> entity = new HttpEntity<>(mail, headers);
             response = restTemplate
                     .exchange("https://httpbin.org/post", HttpMethod.POST, entity, String.class)

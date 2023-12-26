@@ -1,6 +1,7 @@
 package com.sml.testcode.controller;
 
 import com.sml.testcode.model.DataNation;
+import com.sml.testcode.model.Mail;
 import com.sml.testcode.service.KaryawanService;
 import com.sml.testcode.util.AppUtil;
 import io.swagger.annotations.ApiOperation;
@@ -43,10 +44,10 @@ public class PublicController {
 
     @PostMapping(path = "/produce", produces = MediaType.APPLICATION_JSON_VALUE)
     @ApiOperation(" producer ")
-    public ResponseEntity producerAPI(String name) {
+    public ResponseEntity producerAPI(@RequestBody Mail mail) {
         LinkedHashMap<String, Object> res = new LinkedHashMap<>();
         try {
-            karyawanService.posterRestTemplate(name);
+            karyawanService.posterRestTemplate(mail);
             res.put("message", "success");
             res.put("status", "Ok");
             return ResponseEntity.ok().body(res);
