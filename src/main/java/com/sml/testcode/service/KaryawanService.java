@@ -28,7 +28,7 @@ public class KaryawanService {
         flux.subscribe(s -> System.out.println("Subscriber 2: " + s));
     }
 
-    public Object getFile() {
+    public Object getEmployeesRT() {
 
         HttpHeaders headers = new HttpHeaders();
         String response = null;
@@ -38,16 +38,17 @@ public class KaryawanService {
                     .exchange("https://dummy.restapiexample.com/api/v1/employees", HttpMethod.GET, entity, String.class)
                     .getBody();
             System.out.println(response);
+            System.out.println("type data response : " + response.getClass().getSimpleName());
         } catch (Exception e) {
-            LOGGER.info("Failed Hit", e);
+            LOGGER.info("Failed Hit Rest GET", e);
         }
         return response;
     }
 
     public DataNation responseData (Object object) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonString = object.toString();
-        return objectMapper.readValue(jsonString, DataNation.class);
+        String jsonString = object.toString(); //reveal the string
+        return objectMapper.readValue(jsonString, DataNation.class); //construct into object
     }
 
     public void posterRestTemplate(Mail mail){
@@ -64,7 +65,7 @@ public class KaryawanService {
             System.out.println(response.getClass().getSimpleName());
             LOGGER.info("response template " + response);
         } catch (Exception e){
-            LOGGER.info("Failed Hit", e);
+            LOGGER.info("Failed Hit Rest POST", e);
         }
     }
 }

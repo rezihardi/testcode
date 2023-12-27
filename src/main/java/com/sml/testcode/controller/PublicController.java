@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.LinkedHashMap;
 
 @RestController
@@ -24,13 +23,14 @@ public class PublicController {
         LinkedHashMap<String, Object> res = new LinkedHashMap<>();
         try {
             DataNation dataNation = new DataNation();
-            Object object = karyawanService.getFile();
+            Object object = karyawanService.getEmployeesRT();
             if (!AppUtil.isObjectEmpty(object)){
                 dataNation = karyawanService.responseData(object);
             }
             res.put("message", "success");
             res.put("status", "Ok");
-            res.put("data", dataNation.getData());
+            res.put("data", object);
+//            res.put("data", dataNation.getData());
             return ResponseEntity.ok().body(res);
         } catch (Exception e) {
             e.printStackTrace();
