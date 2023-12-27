@@ -3,6 +3,7 @@ package com.sml.testcode.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sml.testcode.model.DataNation;
+import com.sml.testcode.model.DataNation2;
 import com.sml.testcode.model.Mail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,10 +46,34 @@ public class KaryawanService {
         return response;
     }
 
+    public Object getNationsRT() {
+
+        HttpHeaders headers = new HttpHeaders();
+        String response = null;
+        try {
+            HttpEntity<?> entity = new HttpEntity<>(headers);
+            response = restTemplate
+                    .exchange("https://datausa.io/api/data?drilldowns=Nation&measures=Population", HttpMethod.GET, entity, String.class)
+                    .getBody();
+            System.out.println(response);
+            System.out.println("type data response : " + response.getClass().getSimpleName());
+        } catch (Exception e) {
+            LOGGER.info("Failed Hit Rest GET", e);
+        }
+        return response;
+    }
+
+
     public DataNation responseData (Object object) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonString = object.toString(); //reveal the string
         return objectMapper.readValue(jsonString, DataNation.class); //construct into object
+    }
+
+    public DataNation2 responseData2 (Object object) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = object.toString(); //reveal the string
+        return objectMapper.readValue(jsonString, DataNation2.class); //construct into object
     }
 
     public void posterRestTemplate(Mail mail){

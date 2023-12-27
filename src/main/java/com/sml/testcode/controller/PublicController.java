@@ -1,6 +1,7 @@
 package com.sml.testcode.controller;
 
 import com.sml.testcode.model.DataNation;
+import com.sml.testcode.model.DataNation2;
 import com.sml.testcode.model.Mail;
 import com.sml.testcode.service.KaryawanService;
 import com.sml.testcode.util.AppUtil;
@@ -30,6 +31,31 @@ public class PublicController {
             res.put("message", "success");
             res.put("status", "Ok");
             res.put("data", object);
+//            res.put("data", dataNation.getData());
+            return ResponseEntity.ok().body(res);
+        } catch (Exception e) {
+            e.printStackTrace();
+            res.put("status", "false");
+            res.put("message", e.getMessage());
+
+            return ResponseEntity.badRequest()
+                    .body(res);
+        }
+    }
+
+    @GetMapping(path = "/get-all-nations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiOperation(" nation API consume ")
+    public ResponseEntity findNations() {
+        LinkedHashMap<String, Object> res = new LinkedHashMap<>();
+        try {
+            DataNation2 dataNation = new DataNation2();
+            Object object = karyawanService.getNationsRT();
+            if (!AppUtil.isObjectEmpty(object)){
+                dataNation = karyawanService.responseData2(object);
+            }
+            res.put("message", "success");
+            res.put("status", "Ok");
+            res.put("data", dataNation);
 //            res.put("data", dataNation.getData());
             return ResponseEntity.ok().body(res);
         } catch (Exception e) {
